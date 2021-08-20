@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 
   public static void main(String args[]) throws Exception {
-    System.out.println(add("1\n2,-3,-4"));
+    System.out.println(add("1\n2,1003,5,2"));
   }
 
   static int getNumber(String num) {
@@ -35,6 +35,9 @@ public class StringCalculator {
           isNegativePresent = true;
           break;
         } else {
+          if (n > 1000) {
+            n = 0;
+          }
           sum += n;
         }
       }
