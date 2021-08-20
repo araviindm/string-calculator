@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 
   public static void main(String args[]) throws Exception {
-    System.out.println(add("//[***]\n1***2***3"));
+    System.out.println(add("//[*][%]\n1*2%3"));
   }
 
   static int getNumber(String num) {
@@ -28,12 +28,25 @@ public class StringCalculator {
         if ((int) numbers.charAt(2) == 91) {
           String[] arr = numbers.split("]\n");
           delimiter = arr[0].substring(3);
+          if (Pattern.compile("\\]\\[").matcher(delimiter).find()) {
+            String[] limiters = delimiter.split(Pattern.quote("]["));
+            delimiter = "";
+            for (int i = 0; i < limiters.length; i++) {
+              if (i < limiters.length - 1) {
+                delimiter += Pattern.quote(limiters[i]) + '|';
+              } else {
+                delimiter += Pattern.quote(limiters[i]);
+              }
+            }
+          } else {
+            delimiter = Pattern.quote(delimiter);
+          }
           numbers = arr[1];
         } else {
           numbers = numbers.substring(4);
         }
       }
-      String[] num = numbers.split(Pattern.quote(delimiter));
+      String[] num = numbers.split(delimiter);
       int sum = 0;
       boolean isNegativePresent = false;
       for (int i = 0; i < num.length; i++) {
