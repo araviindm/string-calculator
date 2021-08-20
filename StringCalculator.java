@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 
   public static void main(String args[]) throws Exception {
-    System.out.println(add("//[*][%]\n1*2%3"));
+    System.out.println(add("//[***][%%]\n1***2%%3"));
   }
 
   static int getNumber(String num) {
